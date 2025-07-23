@@ -103,7 +103,10 @@ export const AppointmentForm = ({
           type,
         };
 
-        const updatedAppointment = await updateAppointment(appointmentToUpdate);
+        const updatedAppointment = await updateAppointment({
+          ...appointmentToUpdate,
+          timeZone: "UTC",
+        });
 
         if (updatedAppointment) {
           setOpen && setOpen(false);
