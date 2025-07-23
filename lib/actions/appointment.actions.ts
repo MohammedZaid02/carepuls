@@ -29,6 +29,7 @@ export const createAppointment = async (
     return parseStringify(newAppointment);
   } catch (error) {
     console.error("An error occurred while creating a new appointment:", error);
+    return null;
   }
 };
 
@@ -97,6 +98,14 @@ export const getRecentAppointmentList = async () => {
       "An error occurred while retrieving the recent appointments:",
       error
     );
+    // Return empty data structure on error
+    return parseStringify({
+      totalCount: 0,
+      scheduledCount: 0,
+      pendingCount: 0,
+      cancelledCount: 0,
+      documents: [],
+    });
   }
 };
 
@@ -113,6 +122,7 @@ export const sendSMSNotification = async (userId: string, content: string) => {
     return parseStringify(message);
   } catch (error) {
     console.error("An error occurred while sending sms:", error);
+    return null;
   }
 };
 
@@ -142,6 +152,7 @@ export const updateAppointment = async ({
     return parseStringify(updatedAppointment);
   } catch (error) {
     console.error("An error occurred while scheduling an appointment:", error);
+    return null;
   }
 };
 
@@ -160,5 +171,6 @@ export const getAppointment = async (appointmentId: string) => {
       "An error occurred while retrieving the existing patient:",
       error
     );
+    return null;
   }
 };
