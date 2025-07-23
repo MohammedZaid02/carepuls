@@ -57,18 +57,21 @@ export const columns: ColumnDef<Appointment>[] = [
 
       const doctor = Doctors.find(
         (doctor) => doctor.name === appointment.primaryPhysician
-      );
+      ) || {
+        name: appointment.primaryPhysician,
+        image: "/assets/images/dr-lee.png", // fallback image
+      };
 
       return (
         <div className="flex items-center gap-3">
           <Image
-            src={doctor?.image!}
+            src={doctor.image}
             alt="doctor"
             width={100}
             height={100}
             className="size-8"
           />
-          <p className="whitespace-nowrap">Dr. {doctor?.name}</p>
+          <p className="whitespace-nowrap">Dr. {doctor.name}</p>
         </div>
       );
     },
